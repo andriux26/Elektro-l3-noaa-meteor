@@ -53,7 +53,7 @@ if [ "$OBJ_NAME" == "ELEKTRO-L3" ]; then
   while (( i < $DAYS_TO_SCHEDULE_PASSES )); do
     date_pref=$(date --date="+$i days" +"%Y-%m-%d")
     ((i++))
-    for hour in 00 03 06 09 12 15 18 21; do
+    for hour in 00 03 09 12 15 18 21; do
       at_date="$(date --date="TZ=\"UTC\" ${date_pref} ${hour}:41:00" +"%H:%M %D")"
       file_date_ext="$(date --date="TZ=\"UTC\" ${date_pref} ${hour}:41:00" +"%Y%m%d-%H%M")"
       start_epoch_time="$(date --date="TZ=\"UTC\" ${date_pref} ${hour}:41:00" +"%s")"
