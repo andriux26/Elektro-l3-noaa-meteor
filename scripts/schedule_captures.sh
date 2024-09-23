@@ -53,7 +53,7 @@ if [ "$OBJ_NAME" == "ELEKTRO-L3" ]; then
   while (( i < $DAYS_TO_SCHEDULE_PASSES )); do
     date_pref=$(date --date="+$i days" +"%Y-%m-%d")
     ((i++))
-    for hour in 00 03 06 09 12 15 18 21; do
+    for hour in 00 03 09 12 15 18 21; do
       at_date="$(date --date="TZ=\"UTC\" ${date_pref} ${hour}:41:00" +"%H:%M %D")"
       file_date_ext="$(date --date="TZ=\"UTC\" ${date_pref} ${hour}:41:00" +"%Y%m%d-%H%M")"
       start_epoch_time="$(date --date="TZ=\"UTC\" ${date_pref} ${hour}:41:00" +"%s")"
@@ -90,7 +90,7 @@ if [ "$OBJ_NAME" == "ELEKTRO-L3" ]; then
         log "Scheduled capture with job id: ${at_job_id}" "INFO"
   
         # update database with scheduled pass
-        $SQLITE3 $DB_FILE "INSERT OR REPLACE INTO predict_passes (sat_name,pass_start,pass_end,max_elev,is_active,pass_start_azimuth,azimuth_at_max,direction,at_job_id) VALUES (\"${OBJ_NAME}\",$start_epoch_time,$end_epoch_time,12,1,123,15,'-',$at_job_id);"
+        $SQLITE3 $DB_FILE "INSERT OR REPLACE INTO predict_passes (sat_name,pass_start,pass_end,max_elev,is_active,pass_start_azimuth,azimuth_at_max,direction,at_job_id) VALUES (\"${OBJ_NAME}\",$start_epoch_time,$end_epoch_time,12,1,123,15,'GEO',$at_job_id);"
       fi
     done
   done
